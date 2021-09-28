@@ -1,28 +1,35 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="main-container">
+    <h1>my company list</h1>
+    <listApp />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import listApp from './components/listApp.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    listApp
   }
 }
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+<style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+
+.main-container {
+  width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #D8DEF6;
+  border-radius: 10px;
+  padding-bottom: 10px;
+}
+
+h1 {
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: 'Bebas Neue', cursive;
 }
 </style>
