@@ -33,6 +33,7 @@ export default {
 
 /* .name {
     width: 100px;
+    дфоырвловра
 }
 
 .address {
