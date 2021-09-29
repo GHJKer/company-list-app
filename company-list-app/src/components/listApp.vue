@@ -1,14 +1,21 @@
 <template>
   <div class="wrapper bd">
     <div class="companies-container">
-      <div><strong>Имя:</strong></div>
-      <div>Адрес:</div>
-      <div>ОГРН(13):</div>
-      <div>ИНН(10):</div>
-      <div>Дата регистрации:</div>
+      <div class="name-header font-weight"><strong>Имя:</strong></div>
+      <div class="font-weight">Адрес:</div>
+      <div class="font-weight">ОГРН(13):</div>
+      <div class="font-weight">ИНН(10):</div>
+      <div class="font-weight">Дата регистрации:</div>
     </div>
     <ul>
-      <li><appItem /></li>
+      <li
+        v-for="(company, index) in companies"
+        :key="index"
+      >
+        <appItem 
+          :company="company"
+        />
+      </li>
     </ul>
   </div>
 </template>
@@ -20,11 +27,25 @@ export default {
   components: {
     appItem,
   },
+  data() {
+    return {
+      companies: [
+        {
+          id: 1,
+          name: "OOO GasOilNorthCompanyKJHFKHAKLDJAHKAD",
+          address: "Тюмень, ул.Ленина, д.9, оф.902",
+          ogrn: 6486936598634,
+          inn: 7462307844,
+          date: "29.01.2019",
+        },
+      ],
+    };
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 
 .bd {
   border: 1px solid red;
@@ -37,8 +58,16 @@ export default {
 }
 
 .companies-container {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+}
+
+.name-header {
+  margin-right: 60px;
+}
+
+.font-weight {
+  font-weight: bold;
 }
 
 ul {
@@ -51,6 +80,6 @@ li {
 }
 
 div {
-    font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 </style>

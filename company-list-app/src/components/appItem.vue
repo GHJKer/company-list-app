@@ -1,20 +1,19 @@
 <template>
     <div class="fields">
-      <div class="name db"></div>
-      <div class="address db"></div>
-      <div class="ogrn db"></div>
-      <div class="inn db"></div>
-      <div class="date db"></div>
+      <div class="name db">{{ company.name }}</div>
+      <div class="address db">{{ company.address }}</div>
+      <div class="ogrn db">{{ company.ogrn }}</div>
+      <div class="inn db">{{ company.inn }}</div>
+      <div class="date db">{{ company.date }}</div>
     </div>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            companyInfo: [
-                {id: 1,  name: 'OOO GasOilNorthCompany', address: 'Тюмень, ул.Ленина, д.9, оф.902', orgn: 6486936598634, inn: 7462307844, date: '29.01.2019'}
-            ]
+    props: {
+        company: {
+            type: Object,
+            required: true
         }
     }
 }
@@ -24,31 +23,40 @@ export default {
 
 .fields {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
 }
 
 .db {
     border: 1px solid rgb(6, 151, 6);
 }
 
-/* .name {
-    width: 100px;
-    дфоырвловра
+.name {
+    width: 180px;
+    margin-right: 20px;
+    word-break: break-all;
+    padding: 5px;
 }
 
 .address {
-    width: 100px;
+    width: 110px;
+    margin-right: 55px;
+    padding: 5px;
 }
 
 .ogrn {
-    width: 100px;
+    width: 135px;
+    margin-right: 73px;
+    padding: 5px;
 }
 
 .inn {
-    width: 100px;
+    width: 110px;
+    margin-right: 150px;
+    padding: 5px;
 }
 
-.data {
+.date {
     width: 100px;
-} */
+    padding: 5px;
+}
 </style>
