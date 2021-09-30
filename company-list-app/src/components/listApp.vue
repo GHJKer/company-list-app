@@ -1,5 +1,15 @@
 <template>
   <div class="wrapper">
+    <div>
+        <div class="add-btn-container"><addCompany /></div>
+        <div class="add-group">
+        <textarea></textarea>
+        <textarea></textarea>
+        <textarea></textarea>
+        <textarea></textarea>
+        <textarea></textarea>
+        </div>
+    </div>
     <div class="companies-container">
       <div class="name-header font-weight"><strong>Имя:</strong></div>
       <div class="font-weight">Адрес:</div>
@@ -9,15 +19,7 @@
     </div>
     <hr>
     <ul>
-      <li>
-        <addCompany />
-        <textarea></textarea>
-        <textarea></textarea>
-        <textarea></textarea>
-        <textarea></textarea>
-        <textarea></textarea>
-        <hr>
-      </li>
+      
       <li
         v-for="(company, index) in companies"
         :key="index"
@@ -102,13 +104,24 @@ export default {
   font-weight: bold;
 }
 
+.add-btn-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.add-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
 ul {
   list-style: none;
   padding: 0px;
 }
 
 textarea {
-  margin-right: 35px;
+  /* margin-right: 35px; */
   width: 150px;
 }
 
