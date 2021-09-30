@@ -1,12 +1,15 @@
 <template>
   <div class="main-container">
     <h1>my company list</h1>
-    <listApp />
+    <div class="component-container">
+      <listApp />
+    </div>
   </div>
 </template>
 
 <script>
 import listApp from './components/listApp.vue'
+
 
 export default {
   name: 'App',
@@ -26,6 +29,12 @@ export default {
   background-color: #D8DEF6;
   border-radius: 10px;
   padding-bottom: 10px;
+}
+
+.component-container {
+  margin-left: 15px;
+  margin-right: 15px;
+  padding: 10px 5px;
 }
 
 h1 {

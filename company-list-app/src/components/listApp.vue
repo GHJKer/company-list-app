@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper bd">
+  <div class="wrapper">
     <div class="companies-container">
       <div class="name-header font-weight"><strong>Имя:</strong></div>
       <div class="font-weight">Адрес:</div>
@@ -7,14 +7,26 @@
       <div class="font-weight">ИНН(10):</div>
       <div class="font-weight">Дата регистрации:</div>
     </div>
+    <hr>
     <ul>
+      <li>
+        <addCompany />
+        <textarea></textarea>
+        <textarea></textarea>
+        <textarea></textarea>
+        <textarea></textarea>
+        <textarea></textarea>
+        <hr>
+      </li>
       <li
         v-for="(company, index) in companies"
         :key="index"
       >
         <appItem 
           :company="company"
+          @remove-company="removeCompany"
         />
+        <hr>
       </li>
     </ul>
   </div>
@@ -22,10 +34,11 @@
 
 <script>
 import appItem from "./appItem.vue";
+import addCompany from './addCompany.vue'
 
 export default {
   components: {
-    appItem,
+    appItem, addCompany
   },
   data() {
     return {
@@ -33,14 +46,35 @@ export default {
         {
           id: 1,
           name: "OOO GasOilNorthCompanyKJHFKHAKLDJAHKAD",
-          address: "Тюмень, ул.Ленина, д.9, оф.902",
+          address: "г.Тюмень, ул.Ленина, д.9, оф.902",
           ogrn: 6486936598634,
           inn: 7462307844,
           date: "29.01.2019",
         },
+        {
+          id: 2,
+          name: "OOO Советский угледобывающий завод",
+          address: "г.Ленинград, ул.Пушкина, д.17, ст 4",
+          ogrn: 2136932348653,
+          inn: 9899676231,
+          date: "29.01.2019",
+        },
+        {
+          id: 3,
+          name: "OАO РЖД",
+          address: "г.Волгоград, ул.Ватутина, д.4, оф.23",
+          ogrn: 6486936598634,
+          inn: 7462307844,
+          date: "29.01.2019",
+        }
       ],
     };
   },
+  methods: {
+    removeCompany(id) {
+      this.companies = this.companies.filter(t => t.id !== id)
+    }
+  }
 };
 </script>
 
@@ -52,9 +86,7 @@ export default {
 }
 
 .wrapper {
-  margin-left: 15px;
-  margin-right: 15px;
-  padding: 10px 5px;
+  padding: 10px 2px;
 }
 
 .companies-container {
@@ -75,8 +107,9 @@ ul {
   padding: 0px;
 }
 
-li {
-  border: 1px solid red;
+textarea {
+  margin-right: 35px;
+  width: 150px;
 }
 
 div {
