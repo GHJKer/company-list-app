@@ -1,48 +1,103 @@
 <template>
-    <div class="add-btn-container"><button class="add-btn"><span>Добавить компанию</span></button></div>
+  <div class="add-btn-container">
+    <div class="add-btns-container">
+      <button @click="addCompany" class="add-btn btn-styles">
+        <span>Добавить компанию</span>
+      </button>
+      <button class="close-modal btn-styles" @click="closeModal">
+        Закрыть
+      </button>
+    </div>
+
+    <div class="add-group">
+      <textarea v-model="name"></textarea>
+      <textarea v-model="address"></textarea>
+      <textarea v-model="ogrn"></textarea>
+      <textarea v-model="inn"></textarea>
+      <textarea v-model="date"></textarea>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    
-}
+  data() {
+    return {
+      name: "",
+      address: "",
+      ogrn: "",
+      inn: "",
+      date: "",
+    };
+  },
+  methods: {
+    addCompany() {
+      if (this.name.trim()) {
+        const newCompany = {
+          id: Date.now(),
+          name: this.name
+        };
+        this.$emit("add-company", newCompany);
+        this.name = "";
+      }
+    },
+    closeModal() {
+      this.$emit("closeModal");
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
-.add-btn {
-    font: inherit;
-    cursor: pointer;
+.btn-styles {
+  font: inherit;
+  cursor: pointer;
 
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    margin: 2px 0;
-    border: solid 4px transparent;
-    border-radius: 4px;
-    padding: 0.15em 0.3em;
-    color: #ffffff;
-    background-color: #6C757D;
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  margin: 2px 0;
+  border: solid 3px transparent;
+  border-radius: 4px;
+  padding: 0.15em 0.3em;
+  color: #ffffff;
+  background-color: #6c757d;
 }
 
-.add-btn:active {
+.btn-styles:active {
   transform: translateY(1px);
   filter: saturate(150%);
-  border: 4px solid #6b7a88;
+  border: 3px solid #70808d;
 }
 
-.add-btn:hover {
+.btn-styles:hover {
   color: #bfbbc0;
   background-color: #4e5a64;
 }
 
-.add-btn-container {
-    margin-bottom: 10px;
+.add-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.close-modal {
+  margin-left: 10px;
+}
+
+.add-btns-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 10px;
+}
+
+textarea {
+  width: 150px;
 }
 
 span {
-    font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
-
 </style>

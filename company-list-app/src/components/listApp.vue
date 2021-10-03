@@ -1,14 +1,17 @@
 <template>
   <div class="wrapper">
-    <div>
-        <div class="add-btn-container"><addCompany /></div>
-        <div class="add-group">
-        <textarea></textarea>
-        <textarea></textarea>
-        <textarea></textarea>
-        <textarea></textarea>
-        <textarea></textarea>
-        </div>
+    <div class="show-add-btn-container">
+      <button 
+        class="show-add-btn btn-styles"
+        @click="showButtons = true"
+      >
+        + Добавить
+      </button>
+    </div>
+    <div class="add-btns-container" v-if="showButtons">
+        <addCompany 
+          @closeModal="showButtons = false"
+        />
     </div>
     <div class="companies-container">
       <div class="name-header font-weight"><strong>Имя:</strong></div>
@@ -17,18 +20,11 @@
       <div class="font-weight">ИНН(10):</div>
       <div class="font-weight">Дата регистрации:</div>
     </div>
-    <hr>
+    <hr />
     <ul>
-      
-      <li
-        v-for="(company, index) in companies"
-        :key="index"
-      >
-        <appItem 
-          :company="company"
-          @remove-company="removeCompany"
-        />
-        <hr>
+      <li v-for="(company, index) in companies" :key="index">
+        <appItem :company="company" @remove-company="removeCompany" />
+        <hr />
       </li>
     </ul>
   </div>
@@ -36,14 +32,16 @@
 
 <script>
 import appItem from "./appItem.vue";
-import addCompany from './addCompany.vue'
+import addCompany from "./addCompany.vue";
 
 export default {
   components: {
-    appItem, addCompany
+    appItem,
+    addCompany,
   },
   data() {
     return {
+      showButtons: false,
       companies: [
         {
           id: 1,
@@ -68,24 +66,20 @@ export default {
           ogrn: 6486936598634,
           inn: 7462307844,
           date: "29.01.2019",
-        }
+        },
       ],
     };
   },
   methods: {
     removeCompany(id) {
-      this.companies = this.companies.filter(t => t.id !== id)
-    }
-  }
+      this.companies = this.companies.filter((t) => t.id !== id);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
-
-.bd {
-  border: 1px solid red;
-}
 
 .wrapper {
   padding: 10px 2px;
@@ -104,15 +98,38 @@ export default {
   font-weight: bold;
 }
 
-.add-btn-container {
+
+
+.show-add-btn-container {
   display: flex;
   justify-content: flex-end;
+  margin-bottom: 10px;
 }
 
-.add-group {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
+.btn-styles {
+  font: inherit;
+  cursor: pointer;
+
+  display: inline-block;
+  text-align: center;
+  text-decoration: none;
+  margin: 2px 0;
+  border: solid 3px transparent;
+  border-radius: 4px;
+  padding: 0.15em 0.3em;
+  color: #ffffff;
+  background-color: #6c757d;
+}
+
+.btn-styles:active {
+  transform: translateY(1px);
+  filter: saturate(150%);
+  border: 3px solid #70808d;
+}
+
+.btn-styles:hover {
+  color: #bfbbc0;
+  background-color: #4e5a64;
 }
 
 ul {
@@ -120,10 +137,6 @@ ul {
   padding: 0px;
 }
 
-textarea {
-  /* margin-right: 35px; */
-  width: 150px;
-}
 
 div {
   font-family: "Montserrat", sans-serif;
