@@ -17,8 +17,8 @@
     <div class="companies-container">
       <div class="name-header font-weight"><strong>Имя:</strong></div>
       <div class="font-weight">Адрес:</div>
-      <div class="font-weight">ОГРН(13):</div>
-      <div class="font-weight">ИНН(10):</div>
+      <div class="font-weight">ОГРН:</div>
+      <div class="font-weight">ИНН:</div>
       <div class="font-weight">Дата регистрации:</div>
     </div>
     <hr />

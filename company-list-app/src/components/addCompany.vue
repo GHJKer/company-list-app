@@ -12,18 +12,27 @@
     <div class="add-group">
       <div>
         <textarea v-model="name"></textarea>
+        <p class="validation" v-if="!$v.name.required">Введите название компании</p>
       </div>
       <div>
         <textarea v-model="address"></textarea>
+        <p class="validation" v-if="!$v.address.required">Введите адрес компании</p>
       </div>
       <div>
         <textarea v-model="ogrn"></textarea>
+        <p class="validation" v-if="!$v.ogrn.minLength">Не менее 13 цифр!</p>
+        <p class="validation" v-if="!$v.ogrn.maxLength">Не более 13 цифр!</p>
+        <p class="validation" v-if="!$v.ogrn.required">Введите ОГРН компании</p>
       </div>
       <div>
         <textarea v-model="inn"></textarea>
+        <p class="validation" v-if="!$v.inn.minLength">Не менее 10 цифр!</p>
+        <p class="validation" v-if="!$v.inn.maxLength">Не более 10 цифр!</p>
+        <p class="validation" v-if="!$v.inn.required">Введите ИНН компании</p>
       </div>
       <div>
         <textarea v-model="date"></textarea>
+        <p class="validation" v-if="!$v.date.required">Введите дату создания компании</p>
       </div>
       
       
@@ -35,8 +44,12 @@
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate'
+import { minLength, maxLength, required } from 'vuelidate/lib/validators'
+
 
 export default {
+  mixins: [validationMixin],
   data() {
     return {
       name: "",
@@ -45,6 +58,27 @@ export default {
       inn: "",
       date: ""
     };
+  },
+  validations: {
+    name: {
+      required
+    },
+    address: {
+      required
+    },
+    ogrn: {
+      minLength: minLength(13),
+      maxLength: maxLength(13),
+      required
+    },
+    inn: {
+      minLength: minLength(10),
+      maxLength: maxLength(10),
+      required
+    },
+    date: {
+      required
+    }
   },
   methods: {
     addCompany() {
