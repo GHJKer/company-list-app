@@ -1,11 +1,16 @@
 <template>
     <div class="fields">
-      <div class="name">{{ company.id }}) {{ company.name }}</div>
-      <div class="address">{{ company.address }}</div>
+      <div class="name">{{ index + 1 }}) {{ company.name }}</div>
+      <div class="address" v-if="!toEdit" v-on:click="toEdit = !toEdit">{{ company.address }}</div>
+      <div v-if="toEdit">
+          <textarea v-model="company.address">
+          </textarea>
+          <button class="btn-styles" @click="(addressField = company.address), (toEdit = false)">Сохранить</button>
+      </div>
       <div class="ogrn">{{ company.ogrn }}</div>
       <div class="inn">{{ company.inn }}</div>
       <div class="date">{{ company.date }}</div>
-      <div><button type="button" class="close-btn" v-on:click="$emit('remove-company', company.id)">&times;</button></div>
+      <div><button type="button" class="btn-styles" v-on:click="$emit('remove-company', company.id)">&times;</button></div>
     </div>
 </template>
 
@@ -15,6 +20,13 @@ export default {
         company: {
             type: Object,
             required: true
+        },
+        index: Number
+    },
+    data() {
+        return {
+            toEdit: false,
+            addressField: ""
         }
     }
 }
@@ -39,6 +51,13 @@ export default {
     margin-right: 55px;
     padding: 5px;
     word-break: break-word;
+    border: 3px solid transparent;
+    border-radius: 4px;
+}
+
+.address:hover {
+    border: 3px solid #70808d;
+    border-radius: 4px;
 }
 
 .ogrn {
@@ -57,12 +76,12 @@ export default {
     width: 100px;
     padding: 5px;
     margin-right: 20px;
+    word-break: break-word;
 }
 
-.close-btn {
+.btn-styles {
     font: inherit;
     cursor: pointer;
-
     display: inline-block;
     text-align: center;
     text-decoration: none;
@@ -74,15 +93,14 @@ export default {
     background-color: #6C757D;
 }
 
-.close-btn:active {
+.btn-styles:active {
   transform: translateY(1px);
   filter: saturate(150%);
   border: 3px solid #70808d;
 }
 
-.close-btn:hover {
+.btn-styles:hover {
   color: #bfbbc0;
-  /* border-color: currentColor; */
   background-color: #4e5a64;
 }
 </style>

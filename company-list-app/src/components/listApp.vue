@@ -10,6 +10,7 @@
     </div>
     <div class="add-btns-container" v-if="showButtons">
         <addCompany 
+          @add-company="addCompany"
           @closeModal="showButtons = false"
         />
     </div>
@@ -22,8 +23,11 @@
     </div>
     <hr />
     <ul>
-      <li v-for="(company, index) in companies" :key="index">
-        <appItem :company="company" @remove-company="removeCompany" />
+      <li v-for="(company, i) in companies" :key="i">
+        <appItem :company="company" 
+          @remove-company="removeCompany" 
+          :index="i"
+        />
         <hr />
       </li>
     </ul>
@@ -43,30 +47,7 @@ export default {
     return {
       showButtons: false,
       companies: [
-        {
-          id: 1,
-          name: "OOO GasOilNorthCompanyKJHFKHAKLDJAHKAD",
-          address: "г.Тюмень, ул.Ленина, д.9, оф.902",
-          ogrn: 6486936598634,
-          inn: 7462307844,
-          date: "29.01.2019",
-        },
-        {
-          id: 2,
-          name: "OOO Советский угледобывающий завод",
-          address: "г.Ленинград, ул.Пушкина, д.17, ст 4",
-          ogrn: 2136932348653,
-          inn: 9899676231,
-          date: "29.01.2019",
-        },
-        {
-          id: 3,
-          name: "OАO РЖД",
-          address: "г.Волгоград, ул.Ватутина, д.4, оф.23",
-          ogrn: 6486936598634,
-          inn: 7462307844,
-          date: "29.01.2019",
-        },
+        
       ],
     };
   },
@@ -74,6 +55,9 @@ export default {
     removeCompany(id) {
       this.companies = this.companies.filter((t) => t.id !== id);
     },
+    addCompany(company) {
+      this.companies.push(company)
+    }
   },
 };
 </script>

@@ -10,16 +10,32 @@
     </div>
 
     <div class="add-group">
-      <textarea v-model="name"></textarea>
-      <textarea v-model="address"></textarea>
-      <textarea v-model="ogrn"></textarea>
-      <textarea v-model="inn"></textarea>
-      <textarea v-model="date"></textarea>
+      <div>
+        <textarea v-model="name"></textarea>
+      </div>
+      <div>
+        <textarea v-model="address"></textarea>
+      </div>
+      <div>
+        <textarea v-model="ogrn"></textarea>
+      </div>
+      <div>
+        <textarea v-model="inn"></textarea>
+      </div>
+      <div>
+        <textarea v-model="date"></textarea>
+      </div>
+      
+      
+      
+      
+      
     </div>
   </div>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -27,7 +43,7 @@ export default {
       address: "",
       ogrn: "",
       inn: "",
-      date: "",
+      date: ""
     };
   },
   methods: {
@@ -35,10 +51,18 @@ export default {
       if (this.name.trim()) {
         const newCompany = {
           id: Date.now(),
-          name: this.name
+          name: this.name,
+          address: this.address,
+          ogrn: this.ogrn,
+          inn: this.inn,
+          date: this.date
         };
         this.$emit("add-company", newCompany);
         this.name = "";
+        this.address = "";
+        this.ogrn = "";
+        this.inn = "";
+        this.date = "";
       }
     },
     closeModal() {
@@ -91,6 +115,12 @@ export default {
   display: flex;
   justify-content: flex-end;
   padding-bottom: 10px;
+}
+
+.validation {
+  font-size: 10px;
+  margin-block-start: 0;
+  color: red;
 }
 
 textarea {
